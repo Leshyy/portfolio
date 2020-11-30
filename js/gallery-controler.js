@@ -44,11 +44,13 @@ function onOpenModal(projId) {
     var $projTitle = $('.modal-body p:first-of-type');
     var $projDesc = $('p.modal-desc');
     var $projLink = $('.modal-project-link');
+    var $projImg = $('.modal-img');
 
     $projName.text(project.name);
     $projTitle.text(project.title);
     $projDesc.text(project.desc);
     $projLink.attr('href', project.url);
+    $projImg.attr('src', project.imgUrl);
 }
 
 function onContact() {
@@ -59,4 +61,15 @@ function onContact() {
         $subject.val()
     )}&body=${encodeURI($messageContent.val() + '\n' + $userEmail.val())}`;
     window.open(contactUrl, 'blank');
+}
+
+function onAddProject() {
+    var $projName = $('#add-project-name');
+    var $projDesc = $('#add-project-desc');
+    var $projUrl = $('#add-project-url');
+    addProject($projName.val(), 'poopy title', $projDesc.val(), $projUrl.val());
+    $projName.val('');
+    $projDesc.val('');
+    $projUrl.val('');
+    renderProjects();
 }
